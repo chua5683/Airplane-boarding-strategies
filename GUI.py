@@ -1,3 +1,5 @@
+# Credits to Dallas Smith dashingdallas@gmail.com
+
 from tkinter import *
 from tkinter.ttk import Progressbar
 from tkinter import ttk
