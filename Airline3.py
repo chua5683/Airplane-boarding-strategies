@@ -1,5 +1,3 @@
-# Credits to Dallas Smith dashingdallas@gmail.com
-
 import random
 import numpy
 #personal_space=1.2
