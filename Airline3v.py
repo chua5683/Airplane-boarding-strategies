@@ -1,5 +1,3 @@
-# Credits to Dallas Smith dashingdallas@gmail.com
-
 import random
 import time
 from tkinter import *
