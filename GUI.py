@@ -1,15 +1,13 @@
-from tkinter import *
-from tkinter.ttk import Progressbar
-from tkinter import ttk
-from tkinter.ttk import *
-import time
+from tkinter.ttk import Combobox, Entry
+from tkinter import Tk, Label, END, IntVar, Radiobutton, Button, BooleanVar, Checkbutton
 import Airline3v
 import Airline3
 import Ordering
+from FamilyOrdering import familyOrdering
 import random
 import math
 import numpy
-from random import randrange, sample
+from random import randrange
 def random_insert(lst, item):
     lst.insert(randrange(len(lst)+1), item)
     return lst
@@ -17,13 +15,19 @@ def random_insert(lst, item):
 
 window = Tk()
 window.title("Get Ready to board a plane!")
+
+# background_image= PhotoImage('cheapo-mega.png')
+# background_label = Label(window, image=background_image)
+# background_label.place(x=0, y=0, relwidth=1, relheight=1)
+# window.configure(background=background_image)
+
 window.configure(background="gray")
 window.geometry('1000x500')
 
 lblscheme = Label(window, text="Choose a Boarding Scheme")
 lblscheme.grid(column=0, row=0)
 combo = Combobox(window)
-combo['values']= ('BTF', 'BLOCK','WILMA', 'RASS', 'RFOALL', 'STFOPT','STFMOD','Amigos')
+combo['values']= ('BTF', 'BLOCK','WILMA', 'RASS', 'RFOALL', 'STFOPT','STFMOD','Amigos','REVPYR')
 combo.current(0) #set the selected item
 combo.grid(column=1, row=0)
 lblrow = Label(window, text="Number of Rows")
@@ -131,8 +135,21 @@ txtwo = Entry(window,width=3)
 txtwo.insert(END,0)
 txtwo.grid(column=4, row=4)
 
+lblf2 = Label(window, text="Percent of rows with 2-families")
+lblf2.grid(column=3, row=13)
+txtf2 = Entry(window,width=3)
+txtf2.insert(END,0)
+txtf2.grid(column=4, row=13)
+lblf3 = Label(window, text="Percent of rows with 3-families")
+lblf3.grid(column=3, row=12)
+txtf3 = Entry(window,width=6)
+txtf3.insert(END,0)
+txtf3.grid(column=4, row=12)
+
 def clicked():
-    seatlist=Ordering.ordering(int(txtrow.get()),int(txtcol.get()),int(txtgroup.get()),combo.get())
+    fam=[float(txtf3.get()),float(txtf2.get())]
+    # seatlist=Ordering.ordering(int(txtrow.get()),int(txtcol.get()),int(txtgroup.get()),combo.get(),fam)
+    seatlist = familyOrdering(int(txtrow.get()), int(txtcol.get()), int(txtgroup.get()), combo.get(), fam)
     if int(txtpb.get())>0:
         pb=int(math.ceil(int(txtpb.get())/100*len(seatlist)))
         pbList=[]
@@ -165,7 +182,9 @@ def clicked():
     Airline3v.visualboard(seatlist,float(txtstep.get()),float(txtspeed.get()),float(txtps.get()),float(txtctpp.get()),float(txtsn.get()),speedlist,blist)
 
 def clicked1():
-    seatlist=Ordering.ordering(int(txtrow.get()),int(txtcol.get()),int(txtgroup.get()),combo.get())
+    fam=[float(txtf3.get()),float(txtf2.get())]
+    # seatlist=Ordering.ordering(int(txtrow.get()),int(txtcol.get()),int(txtgroup.get()),combo.get(),fam)
+    seatlist = familyOrdering(int(txtrow.get()), int(txtcol.get()), int(txtgroup.get()), combo.get(), fam)
     if int(txtpb.get())>0:
         pb=int(math.ceil(int(txtpb.get())/100*len(seatlist)))
         pbList=[]
@@ -202,7 +221,9 @@ def clicked1():
 def clicked2():
     timelist=[]
     for i in range(int(txtruns.get())):
-        seatlist=Ordering.ordering(int(txtrow.get()),int(txtcol.get()),int(txtgroup.get()),combo.get())
+        fam=[float(txtf3.get()),float(txtf2.get())]
+        # seatlist=Ordering.ordering(int(txtrow.get()),int(txtcol.get()),int(txtgroup.get()),combo.get(),fam)
+        seatlist = familyOrdering(int(txtrow.get()), int(txtcol.get()), int(txtgroup.get()), combo.get(), fam)
         if int(txtpb.get())>0:
             pb=int(math.ceil(int(txtpb.get())/100*len(seatlist)))
             pbList=[]

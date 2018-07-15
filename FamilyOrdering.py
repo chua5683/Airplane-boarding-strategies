@@ -44,7 +44,10 @@ def familyEffects(nrows, ncols, groups, methods, percentFamily = [0.2, 0.4]):
     famSize_2 = []
     allRows = [i for i in range(nrows)]
 #     print(leftRows)
+#     print(len(leftRows))
 #     print(rightRows)
+#     print(len(rightRows))
+    
     leftRowInd = random.sample(leftRows, int(nrows*percentFamily[1]))
     rightRowInd = random.sample(rightRows, int(nrows*percentFamily[1]))
     for x in leftRowInd:
@@ -105,6 +108,7 @@ def familyOrdering(nrows, ncols, groups, methods, percentFamily = [0.2, 0.4]):
         familyOrdering = familyEffects(nrows, ncols, groups, 'BTF', percentFamily) 
 
     elif methods == 'BLOCK':
+        groups = 3
         familyOrdering = familyEffects(nrows, ncols, groups, 'BLOCK', percentFamily)
 
     elif methods == 'WILMA':
@@ -124,13 +128,14 @@ def familyOrdering(nrows, ncols, groups, methods, percentFamily = [0.2, 0.4]):
     
     elif methods == 'REVPYR':
         # groups = 4 or 5
+        groups = 4
         familyOrdering = familyEffects(nrows, ncols, groups, 'REVPYR', percentFamily)
     
     elif methods == 'RFOALL':
         familyOrdering = familyEffects(nrows, ncols, groups, 'RFOALL', percentFamily)
     
     elif methods == 'Amigos':
-        print('Waiting for the surprise!')
+        familyOrdering = ordering(nrows, ncols, groups, 'Amigos', percentFamily)
 
     return familyOrdering
 
